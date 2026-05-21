@@ -40,7 +40,6 @@ sql-join
 visualisaties
 r-package
 introduction-to-the-project
-references
 covid-19-data-analysis-report-europe
 learning-a-new-skill
 planning
@@ -76,4 +75,3 @@ splitting-the-data-1
 training-a-machine-learning-model-1
 step-6-model-evaluation-1
 final-conclusion
-references-1
