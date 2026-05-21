@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Introduction to the project | Jinte van den Brink portfolio</title>
-  <meta name="description" content="8 Introduction to the project | Jinte van den Brink portfolio" />
+  <title>6 SQL | Jinte van den Brink portfolio</title>
+  <meta name="description" content="6 SQL | Jinte van den Brink portfolio" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Introduction to the project | Jinte van den Brink portfolio" />
+  <meta property="og:title" content="6 SQL | Jinte van den Brink portfolio" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Introduction to the project | Jinte van den Brink portfolio" />
+  <meta name="twitter:title" content="6 SQL | Jinte van den Brink portfolio" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="r-package.html"/>
-<link rel="next" href="covid-19-data-analysis-report-europe.html"/>
+<link rel="prev" href="reproducible-science.html"/>
+<link rel="next" href="r-package.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -256,23 +256,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-the-project" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">8</span> Introduction to the project<a href="introduction-to-the-project.html#introduction-to-the-project" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Prostate cancer is one of the most common types of cancer among men worldwide <span class="citation">[@wcrf2024prostate]</span>. Treatment options for prostate cancer include surgery, radiotherapy, hormone therapy, and systemic treatments such as chemotherapy or immunotherapy in advanced stages <span class="citation">[@eau2023prostate]</span>.</p>
-<p>Decision-making in prostate cancer care can be supported by a patients-like-me dashboard that shows outcomes and experiences of similar patients, helping patients and clinicians make more informed decisions <span class="citation">[@umcu2026dashboard]</span>.</p>
-<p>For this project, a data-driven dashboard is developed to support shared decision-making in prostate cancer care. The dashboard provides clinicians and patients with an overview of treatment options and the effects of different treatments on patient-reported outcomes, including EPIC-26 and IPSS scores.</p>
-<p>EPIC-26 (Expanded Prostate Cancer Index Composite – 26 item version) is a validated questionnaire that measures health-related quality of life in prostate cancer patients. It assesses urinary, bowel, sexual, and hormonal function domains and is widely used to evaluate treatment-related side effects <span class="citation">[@umich_epic2024]</span>.</p>
-<p>IPSS (International Prostate Symptom Score) is a standardized clinical questionnaire used to assess the severity of urinary symptoms and monitor changes over time <span class="citation">[@resref_ipss2024]</span>.</p>
-<p>Together, these measures provide important insight into both functional outcomes and quality of life after different treatment options.</p>
+<div id="sql" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> SQL<a href="sql.html#sql" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-1" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introduction<a href="sql.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this assignment, I worked with SQL and PostgreSQL to manipulate and combine multiple datasets. The datasets contained information about flu cases, dengue cases, and demographic information from the Gapminder dataset. The goal was to clean the datasets, import them into PostgreSQL, perform joins using SQL queries, and visualize the resulting data in R.</p>
+</div>
+<div id="preperation" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Preperation<a href="sql.html#preperation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The flu and dengue datasets were originally in wide format. I used pivot_longer() to convert them into tidy datasets where each row represented one country at one date. Missing values were removed using filter(!is.na(cases)). A year variable was extracted from the date column using the lubridate package. Before importing the data into PostgreSQL, I converted the variables to consistent data types such as numeric, integer, character, and date.</p>
+</div>
+<div id="dbeaver" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Dbeaver<a href="sql.html#dbeaver" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I created a PostgreSQL database called workflowsdb in DBeaver. The cleaned CSV files were imported as separate tables. SQL queries were used to inspect the data and verify that the variables were imported correctly.</p>
+</div>
+<div id="sql-join" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> SQL join<a href="sql.html#sql-join" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I used SQL LEFT JOIN statements to combine the flu, dengue, and gapminder tables. The datasets were joined on the variables country and year. A LEFT JOIN was used to ensure that all flu observations remained in the final dataset, even if information from the other datasets was missing.</p>
+</div>
+<div id="visualisaties" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Visualisaties<a href="sql.html#visualisaties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>After exporting the merged dataset from PostgreSQL, I imported it into R for visualization. Scatterplots were created to explore relationships between flu cases, dengue cases, and demographic variables such as life expectancy and GDP.
+<img src="portfolio_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>This graph shows the relationship between flu cases and dengue cases. Each point represents a country in a specific year. The plot shows that flu cases vary widely, while dengue cases are generally lower.</p>
+<p><img src="portfolio_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+This graph shows the relationship between GDP and life expectancy. In general, countries with a higher GDP tend to have a higher life expectancy. However, there is still variation between countries.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="r-package.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="covid-19-data-analysis-report-europe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reproducible-science.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

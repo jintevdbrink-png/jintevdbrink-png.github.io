@@ -35,7 +35,10 @@ results
 reproducibility-of-the-article
 what-can-the-code-do
 reproducibility
+sql
+introduction-1
 preperation
+dbeaver
 sql-join
 visualisaties
 r-package
